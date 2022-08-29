@@ -22,7 +22,7 @@ def write_files(mesh, folder, E=1.0e8, nu=0.3, load=20.0e3):
     mesh_pts = mesh.points
     elements = mesh.cells_dict['triangle']
 
-    os.mkdir(folder)
+    os.makedirs(folder, exist_ok=True)
 
     # Write nodes.txt
     # fix bottom
