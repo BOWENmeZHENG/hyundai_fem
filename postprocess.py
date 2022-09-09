@@ -61,5 +61,4 @@ def output_csv(folder, disp, strain, stress):
     with open(f"{folder}/{folder}.csv", "w") as f:
         f.write("coorx,coory,dispx,dispy,strainxx,strainyy,strainxy,stressxx,stressyy,stressxy\n")
         for i in range(len(nodes_x)):
-            f.write(f"{nodes_x[i]},{nodes_y[i]},{disp_x[i]:.5},{disp_y[i]:.5},{strain_xx[i]:.5},/"
-                    f"{strain_yy[i]:.5},{strain_xy[i]:.5},{stress_xx[i]:.5},{stress_yy[i]:.5},{stress_xy[i]:.5}\n")
+            f.write(f"{nodes_x[i]},{nodes_y[i]},{disp_x[i]:.5},{disp_y[i]:.5},{strain_xx[i]:.5},{strain_yy[i]:.5},{strain_xy[i]:.5},{stress_xx[i]:.5},{stress_yy[i]:.5},{stress_xy[i]:.5}\n")
