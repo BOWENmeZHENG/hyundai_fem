@@ -39,3 +39,27 @@ def plot_results(folder, disp, strain, stress):
     plt.yticks(fontsize=18)
     plt.axis("image")
     plt.show()
+
+
+def output_csv(folder, disp, strain, stress):
+    """
+
+    :return:
+    """
+    nodes, _, elements, _ = pre.readin(folder=folder+'/')
+    nodes_x = nodes[:, 1]
+    nodes_y = nodes[:, 2]
+    disp_x = disp[:, 0]
+    disp_y = disp[:, 1]
+    strain_xx = strain[:, 0]
+    strain_yy = strain[:, 1]
+    strain_xy = strain[:, 2]
+    stress_xx = stress[:, 0]
+    stress_yy = stress[:, 1]
+    stress_xy = stress[:, 2]
+
+    with open(f"{folder}/{folder}.csv", "w") as f:
+        f.write("coorx,coory,dispx,dispy,strainxx,strainyy,strainxy,stressxx,stressyy,stressxy\n")
+        for i in range(len(nodes_x)):
+            f.write(f"{nodes_x[i]},{nodes_y[i]},{disp_x[i]:.5},{disp_y[i]:.5},{strain_xx[i]:.5},/"
+                    f"{strain_yy[i]:.5},{strain_xy[i]:.5},{stress_xx[i]:.5},{stress_yy[i]:.5},{stress_xy[i]:.5}\n")
