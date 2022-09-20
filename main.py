@@ -1,11 +1,20 @@
-import run_fem
-import postprocess
+import analysis_for_one as one
+import numpy as np
+import os
+import shutil
 
-disp, strain, stress, folder = run_fem.run(width=1.5, height=0.5, radius=0.14,
-                                           center_x=0.1, center_y=0.1,
-                                           E=1.0e8, nu=0.3, load=20.0e3)
-stress /= 1e6  # Unit: MPa
+radii = np.linspace(0.05, 0.15, 4)
+centers_x = np.linspace(-0.5, 0.5, 4)
+centers_y = np.linspace(-0.075, 0.075, 4)
 
-postprocess.plot_results(folder, disp, strain, stress)
+for radius in radii:
+    for center_x in centers_x:
+        for center_y in centers_y:
+            folder = one.analysis(width=1.5, height=0.5,
+                                  radius=radius, center_x=center_x, center_y=center_y,
+                                  E=1.0e8, nu=0.3, load=20.0e3
+                                  )
+            os.makedirs("data", exist_ok=True)
+            shutil.copyfile(f"{folder}/{folder}_elements.csv", f"data/{folder}_elements.csv")
+            shutil.copyfile(f"{folder}/{folder}_nodes.csv", f"data/{folder}_nodes.csv")
 
-postprocess.output_csv(folder, disp, strain, stress)
