@@ -43,8 +43,7 @@ def plot_results(folder, disp, strain, stress):
 
 def output_csv(folder, disp, strain, stress):
     """
-
-    :return:
+    node index starts at 0
     """
     nodes, _, elements, _ = pre.readin(folder=folder+'/')
     nodes_x = nodes[:, 1]
@@ -58,7 +57,12 @@ def output_csv(folder, disp, strain, stress):
     stress_yy = stress[:, 1]
     stress_xy = stress[:, 2]
 
-    with open(f"{folder}/{folder}.csv", "w") as f:
-        f.write("coorx,coory,dispx,dispy,strainxx,strainyy,strainxy,stressxx,stressyy,stressxy\n")
+    with open(f"{folder}/{folder}_nodes.csv", "w") as f:
+        f.write("nodeid,coorx,coory,dispx,dispy,strainxx,strainyy,strainxy,stressxx,stressyy,stressxy\n")
         for i in range(len(nodes_x)):
-            f.write(f"{nodes_x[i]},{nodes_y[i]},{disp_x[i]:.5},{disp_y[i]:.5},{strain_xx[i]:.5},{strain_yy[i]:.5},{strain_xy[i]:.5},{stress_xx[i]:.5},{stress_yy[i]:.5},{stress_xy[i]:.5}\n")
+            f.write(f"{i},{nodes_x[i]},{nodes_y[i]},{disp_x[i]:.5},{disp_y[i]:.5},{strain_xx[i]:.5},{strain_yy[i]:.5},{strain_xy[i]:.5},{stress_xx[i]:.5},{stress_yy[i]:.5},{stress_xy[i]:.5}\n")
+
+    with open(f"{folder}/{folder}_elements.csv", "w") as f:
+        f.write("elem1,elem2,elem3\n")
+        for i in range(len(elements)):
+            f.write(f"{elements[i, -3]},{elements[i, -2]},{elements[i, -1]}\n")

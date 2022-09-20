@@ -11,9 +11,8 @@ def run(width=1, height=0.5, radius=0.1,
     preprocess.write_files(mesh, folder, E=E, nu=nu, load=load)
     disp_complete, strain_nodes, stress_nodes = solids_GUI(plot_contours=plot_contours,
                                                            compute_strains=compute_strains,
-                                                           folder=folder+'/')
+                                                           folder=folder + '/')
     if plot_contours:
         plt.show()
 
     return disp_complete, strain_nodes, stress_nodes, folder
-
