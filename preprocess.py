@@ -2,7 +2,7 @@ import os
 import pygmsh
 
 
-def meshing(width=1, height=0.5, radius=0.1, mesh_size=0.02):
+def meshing(width=1, height=0.5, radius=0.1, center_x=0, center_y=0, mesh_size=0.02):
     with pygmsh.occ.Geometry() as geom:
         geom.characteristic_length_max = mesh_size
         outer = geom.add_polygon([
@@ -12,7 +12,7 @@ def meshing(width=1, height=0.5, radius=0.1, mesh_size=0.02):
             [-width / 2, height / 2],
         ])
 
-        inner = geom.add_disk([0.0, 0.0], radius)
+        inner = geom.add_disk([center_x, center_y], radius)
         geom.boolean_difference(outer, inner)
         mesh = geom.generate_mesh()
     return mesh

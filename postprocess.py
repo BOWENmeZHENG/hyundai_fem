@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def plot_results(folder, disp, strain, stress):
-    nodes, _, elements, _ = pre.readin(folder=folder)
+    nodes, _, elements, _ = pre.readin(folder=folder+'/')
     tri = post.mesh2tri(nodes, elements)
 
     # S_xx
