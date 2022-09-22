@@ -3,10 +3,12 @@ import numpy as np
 import os
 import shutil
 
-radii = np.linspace(0.05, 0.1, 2)
-centers_x = np.linspace(-0.1, 0.1, 2)
-centers_y = np.linspace(-0.05, 0.05, 2)
+# Define parameters of training data
+radii = np.linspace(0.05, 0.1, 4)
+centers_x = np.linspace(-0.1, 0.1, 4)
+centers_y = np.linspace(-0.05, 0.05, 4)
 
+# Write .csv files for ML training
 for radius in radii:
     for center_x in centers_x:
         for center_y in centers_y:
